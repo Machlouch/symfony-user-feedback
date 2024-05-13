@@ -1,7 +1,7 @@
 
 
 
-***Gestion des Utilisateurs et Réclamations***
+***Gestion des Utilisateurs et Réclamations*** : 
 Ce projet Symfony se concentre sur le développement des fonctionnalités suivantes :
 
 - Authentification et Inscription :
