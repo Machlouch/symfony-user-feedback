@@ -1,0 +1,101 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block body %}
+<br><br><br>
+<div class="container">
+  <h1 class="text-center mb-4">Sign in</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form method="post"  novalidate onsubmit="return validateForm()">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <br><br><br><br><br><br>
+
+    <label for="inputEmail">Email</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
+
+    <label for="inputPassword">Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <!-- Exemple de section commentée pour une future fonctionnalité -->
+    <!-- <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+        </label>
+    </div> -->
+    <br>
+
+    <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+
+    <div class="mt-3">
+        <span>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">Inscrivez-vous</a></span>
+    </div>
+
+    <div class="mt-3">
+        <span>Mot de passe oublié ? <a href="{{ path('reset_password') }}">Mot de passe oublié</a></span>
+    </div>
+</form>
+
+<script>
+    function validateForm() {
+        var email = document.getElementById("inputEmail").value;
+        var password = document.getElementById("inputPassword").value;
+
+        if (email.trim() === '' ) {
+            alert("Veuillez remplir  le champs email .");
+            return false; 
+        }
+
+           if ( password.trim() === '') {
+            alert("Veuillez remplir  le champs password.");
+            return false; 
+        }
+
+        return true; // Autorise l'envoi du formulaire
+    }
+</script>
+
+    </div>
+
+    <!-- Section pour l'image de fond, déplacée correctement -->
+    <div class="col-md-6 order-md-1">
+      <div class="hero overlay image-cadre" style="background-image: url('assets/images/background.jpg');">
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Styles pour le cadre de l'image et le formulaire */
+.image-cadre {
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+.hero.overlay:before {
+    content: '';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.form-control {
+    height: 43px;
+    border-radius: 4px;
+    border-width: 1px;
+    color: #b73f3f !important;
+    border-color: rgba(255, 255, 255, 0.2);
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+</style>
+
+{% endblock %}
